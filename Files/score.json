@@ -1,0 +1,35 @@
+{
+  "score": {
+    "p1": {
+      "naam": {},
+      "maken": {},
+      "caram": {}
+    },
+    "p2": {
+      "naam": {},
+      "maken": {},
+      "caram": {}
+    },
+    "beurten": {
+      "aantal": {}
+    },
+    "aan_stoot": {
+      "speler": {}
+    },
+	 "spelduur": {
+      "tijd": {}
+    },
+	 "autoinnings":{
+	  "value": {}
+	  },
+    "hsP1": {
+      "aantal": {}
+    },
+    "hsP2": {
+      "aantal": {}
+    },
+    "currhoogsteserie": {
+      "aantal": {}
+    }
+  }
+}

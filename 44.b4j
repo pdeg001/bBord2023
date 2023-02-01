@@ -1,0 +1,273 @@
+﻿AppType=JavaFX
+Build1=Marcel,nl.pdeg.bord
+Build2=sale,nl.pdeg.bord,SALE
+File1=bal.png
+File10=error_bord.bjl
+File11=gamerunning.brd
+File12=genScreenSaver.bjl
+File13=loading.png
+File14=logo.png
+File15=main.bjl
+File16=Montserrat-Regular.ttf
+File17=mouse.png
+File18=mqtt.conf
+File19=mqtt.csp
+File2=bestelling_plaatsen.bjl
+File20=n205.css
+File21=ODT0.gif
+File22=ODT0.gif.old
+File23=orderdrink.json
+File24=retro.cnf
+File25=retrobackup.json
+File26=retrobord.bjl
+File27=score.json
+File28=scorebord.bjl
+File29=share_score.json
+File3=boardTemp.json
+File30=survival.cnf
+File31=survivalbackup.json
+File32=survivalbord.bjl
+File33=swaf.png
+File34=swaffie.png
+File4=bordMenu.bjl
+File5=cnf.44
+File6=currscore.json
+File7=digital-7.ttf
+File8=digital-7_italic.ttf
+File9=eenvreselijkekraai1.png
+FileGroup1=images
+FileGroup10=forms
+FileGroup11=data
+FileGroup12=forms
+FileGroup13=images
+FileGroup14=images
+FileGroup15=forms
+FileGroup16=fonts
+FileGroup17=images
+FileGroup18=data
+FileGroup19=data
+FileGroup2=forms
+FileGroup20=data
+FileGroup21=images
+FileGroup22=Default Group
+FileGroup23=data
+FileGroup24=data
+FileGroup25=data
+FileGroup26=forms
+FileGroup27=data
+FileGroup28=forms
+FileGroup29=data
+FileGroup3=data
+FileGroup30=data
+FileGroup31=data
+FileGroup32=forms
+FileGroup33=Default Group
+FileGroup34=images
+FileGroup4=forms
+FileGroup5=data
+FileGroup6=data
+FileGroup7=fonts
+FileGroup8=fonts
+FileGroup9=images
+Group=Default Group
+Library1=javaobject
+Library10=xui views
+Library2=jcore
+Library3=jfx
+Library4=jmqtt
+Library5=jnetwork
+Library6=jokhttputils2
+Library7=jrandomaccessfile
+Library8=jshell
+Library9=json
+Module1=B4XProgressBar
+Module10=classUpdate
+Module11=error_bord
+Module12=func
+Module13=funcInet
+Module14=funcScorebord
+Module15=getNode
+Module16=GetRot
+Module17=inactiveClass
+Module18=ListOfBords
+Module19=menuBorden
+Module2=ClassBallTime
+Module20=mqttOrderDrink
+Module21=mqttPubBord
+Module22=mqttPubData
+Module23=MqttSubPub
+Module24=parseConfig
+Module25=retroBord
+Module26=RotateMedia
+Module27=scorebord
+Module28=ScreenSaver
+Module29=ScreenSaverInactive
+Module3=ClassButtonNieuwPartij
+Module30=Starter
+Module31=survivalbord
+Module32=timerClass
+Module4=classCheckConfig
+Module5=classGameTimer
+Module6=classGen
+Module7=ClassHoogsteSerie
+Module8=classNewGame
+Module9=ClassOrderDrink
+NumberOfFiles=34
+NumberOfLibraries=10
+NumberOfModules=32
+Version=9.8
+@EndOfDesignText@
+#PackagerProperty: ExeName = Scorebord
+#PackagerProperty: AppName = Scorebord
+#PackagerProperty: AppVersion = 1.7.6
+#PackagerProperty: AppPublisher = Beecee Electronics
+
+#Region Project Attributes 
+	#MainFormWidth: 1920
+	#MainFormHeight: 1080 
+#End Region
+
+#IgnoreWarnings: 16,9, 10
+'#VirtualMachineArgs: -Djavafx.platform=monocle -Dmonocle.platform=Headless -Dprism.order=sw
+'#VirtualMachineArgs: --add-opens javafx.controls/com.sun.javafx.scene.control.skin=ALL-UNNAMED
+'#PackagerProperty: VMArgs = --add-opens javafx.controls/com.sun.javafx.scene.control.skin=b4j
+
+Sub Process_Globals
+	Private fx As JFX
+	Private MainForm As Form
+	Private clsGen As classGen
+	Public frmMain As Form
+	Private loc As String = "/home/pi/.config/"
+	Private ext As String = ".conf"
+	Private ixt As String = "pi"
+	Private result1 As Boolean = True
+	Type Message (Body As String, From As String)
+	Type pubBordData(data As List, from As String)
+	Type MemberList(name As String)
+	Type MediaList(name As String, byteMedia() As Byte)
+End Sub
+
+Sub AppStart (Form1 As Form, Args() As String)
+	frmMain.Initialize("frm", 1920, 1080)
+	frmMain.SetFormStyle("UNDECORATED")
+	
+	If func.DetectOS.IndexOf("win") > -1 Then
+		frmMain.SetFormStyle("DECORATED")
+	Else
+		frmMain.SetFormStyle("UNDECORATED")
+	End If
+	
+	frmMain.RootPane.LoadLayout("main")
+	frmMain.Show
+	func.SetCustomCursor1(File.DirAssets, "mouse.png", 370, 370, frmMain.RootPane)
+	
+'''	Dim appPath As String = parseConfig.getAppPath
+	Dim os As String = parseConfig.DetectOS
+'	frmMain.RootPane.LoadLayout("main")
+	funcScorebord.isBordClient = False
+	func.GetAppPath
+	CheckNetwork
+	
+	#If SALE
+	clsGen.Initialize
+	result1 = clsGen.validate
+	#End if
+	
+	CopyCreateFilesFolders
+	funcScorebord.host = File.ReadString(func.appPath, "mqtt.csp")
+	
+	If result1 Then
+		retroBord.show
+		survivalbord.show
+		scorebord.Show
+	Else
+		error_bord.show
+	End If
+End Sub
+
+Public Sub hideMainForm
+	Dim mf As JavaObject = frmMain.RootPane
+	mf.RunMethodJO("getScene",Null).RunMethodJO("getWindow",Null).RunMethod("hide",Null)
+End Sub
+
+
+Sub frm_CloseRequest (EventData As Event)
+	EventData.Consume
+End Sub
+
+Sub retP As String
+	Return loc
+End Sub
+
+Sub retN As String
+	Return ixt
+End Sub
+
+Sub retE As String
+	Return ext
+End Sub
+
+'Return true to allow the default exceptions handler to handle the uncaught exception.
+Sub Application_Error (Error As Exception, StackTrace As String) As Boolean
+	LogError(Error)
+	LogError(StackTrace)
+	File.WriteString(func.appPath, "errStackTrace.txt", StackTrace)
+	File.WriteString(func.appPath, "errError.txt", Error)
+	Return True
+End Sub
+
+Sub CheckNetwork
+	func.getIpNumber
+End Sub
+
+Sub CopyCreateFilesFolders
+	Dim appPath As String = func.appPath
+	
+	If File.Exists(appPath, "retro.cnf") = False Then
+		File.Copy(File.DirAssets, "retro.cnf", appPath, "retro.cnf")
+	Else
+		If TestRetroJson = False Then
+			File.Copy(File.DirAssets, "retro.cnf", appPath, "retro.cnf")
+		End If
+	End If
+	If File.Exists(appPath, "mqtt.conf") = False Then
+		File.Copy(File.DirAssets, "mqtt.conf", appPath, "mqtt.conf")
+	End If
+	If File.Exists(appPath, "cnf.44") = False Then
+		File.Copy(File.DirAssets, "cnf.44", appPath, "cnf.44")
+	End If
+	If File.Exists(appPath, "mqtt.csp") = False Then
+		File.Copy(File.DirAssets, "mqtt.csp", appPath, "mqtt.csp")
+	End If
+	
+	If File.IsDirectory(appPath, "media") = False Then
+		File.MakeDir(appPath, "media")
+	End If
+	If File.IsDirectory(appPath, "rotatemedia") = False Then
+		File.MakeDir(appPath, "rotatemedia")
+	End If
+	If File.IsDirectory(appPath, "gepeelde_partijen") = False Then
+		File.MakeDir(appPath, "gespeelde_partijen")
+	End If
+	If File.IsDirectory(appPath, "vereniging_spelers") = False Then
+		File.MakeDir(appPath, "vereniging_spelers")
+	End If
+	
+End Sub
+
+Private Sub TestRetroJson As Boolean
+	Dim strRetro As String = File.ReadString(func.appPath, "retro.cnf")
+	Dim parser As JSONParser
+	parser.Initialize(strRetro)
+	Try
+		Dim root As Map = parser.NextObject
+		Dim retro As Map = root.Get("retroBord")
+		Dim active As String = retro.Get("active")
+		Dim survival As Map = root.Get("survival")
+		Dim sactive As String = survival.Get("sactive")
+	Catch
+		Return False
+	End Try
+	Return True
+End Sub
+

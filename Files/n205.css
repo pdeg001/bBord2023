@@ -1,0 +1,186 @@
+
+.LabelLed {
+	-fx-background-color: transparent;
+	-fx-text-fill: #FF0000;	
+}
+.LabelLed:hover{
+	-fx-background-color: #FF00FF;
+	-fx-text-fill: #FFEE00 ;
+   }
+
+.labelWhite{
+    -fx-background-color: #ffffff;
+}
+
+.labelWhite:hover {
+  /*  -fx-background-color: linear-gradient(to bottom,  #cfe7fa 0%,#6393c1 100%);
+	-fx-background-radius: 3,2,1;*/
+}
+
+.labelScore {
+	 -fx-background-color: #00008B;
+	 
+}
+
+.labelPlayer {
+	-fx-text-fill: #000000;
+}
+
+.labelPlayer:hover {
+    -fx-background-color: linear-gradient(to bottom,  #cfe7fa 0%,#6393c1 100%);
+/*	-fx-background-radius: 3,2,6;*/
+}
+
+.labelScore:hover {
+ /*   -fx-background-color: linear-gradient(to bottom,  #cfe7fa 0%,#6393c1 100%);
+	-fx-background-radius: 3,2,1;*/
+}
+
+.labelCarom {
+	  /*-fx-background-color: #00008B;*/
+	  -fx-background-color: #000053;
+	  -fx-text-fill: #ffffff;
+}
+
+.labelCarom:hover {
+    -fx-background-color: #FF00FF;
+   /* -fx-background-color: linear-gradient(to bottom,  #cfe7fa 0%,#6393c1 100%);*/
+	/*-fx-background-color: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 7%, rgba(0,212,255,1) 100%);*/
+	/*-fx-text-fill: #FFFF00;*/
+/*>>>>>>	-fx-text-fill: #000000;
+	-fx-background-radius: 3 2 1;
+	-fx-effect: dropshadow( three-pass-box , rgba(255,255,255,0.8) , 10, 0.0 , 0 , 0 );*/
+	 /*   -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);*/
+}
+
+.labelDummyCarom {
+	  -fx-background-color: transparent;
+	  -fx-text-fill: transparent;
+}
+
+.labelDummyCarom:hover{
+	 -fx-text-fill: white;
+	-fx-border-color: white;
+}
+
+.labelClubPlayer {
+	  -fx-background-color: blue;
+	  -fx-text-fill: yellow;
+}
+
+.labelClubPlayer:hover {
+    -fx-background-color: #FF00FF;
+   	-fx-text-fill: #000000;
+	-fx-background-radius: 3 2 1;
+	-fx-effect: dropshadow( three-pass-box , rgba(255,255,255,0.8) , 10, 0.0 , 0 , 0 );
+	
+}
+
+
+
+.button {
+	-fx-background-color: linear-gradient(to bottom,  #cfe7fa 0%,#6393c1 100%);
+	  -fx-text-fill: #000000;
+	 
+}
+
+.button:hover {
+	-fx-background-color: #0A00FF;
+	-fx-text-fill: #FFFF00;
+	-fx-effect: dropshadow( three-pass-box , rgba(255,255,255,1) , 30, 0.0 , 0 , 1 );
+}
+
+.checkbox {
+	-fx-background-color: #ffffff;
+	-fx-text-fill: #000000;
+}
+
+.checkbox:hover {
+	-fx-background-color: #0A00FF;
+	-fx-text-fill: #FFFF00;
+}
+
+.list-cell:filled:selected:focused, .list-cell:filled:selected {
+	-fx-background-color: linear-gradient(#328BDB 0%, #207BCF 25%, #1973C9 75%, #0A65BF 100%);
+    -fx-text-fill: yellow;
+}
+
+.list-cell:even { /* <=== changed to even */
+    -fx-background-color: white;
+}
+
+.list-cell:filled:hover {
+	 -fx-background-color: #FF00FF;
+   	-fx-text-fill: #000000;
+	-fx-background-radius: 3 2 1;
+	-fx-effect: dropshadow( three-pass-box , rgba(255,255,255,0.8) , 10, 0.0 , 0 , 0 );
+    /*-fx-background-color: blue;
+    -fx-text-fill: yellow;*/
+}
+
+.table-row-cell:odd {
+  -fx-background-color: -fx-table-cell-border-color, -fx-control-inner-background;
+  -fx-background-insets: 0, 0 0 1 0;
+}
+
+.table-row-cell:focused:odd {
+  -fx-background-color: -fx-focus-color, -fx-cell-focus-inner-border, -fx-control-inner-background;
+  -fx-background-insets: 0, 1, 2;
+}
+
+.table-view:focused .table-row-cell:filled:focused:selected {
+  -fx-background-color: -fx-focus-color, -fx-cell-focus-inner-border, -fx-selection-bar;
+  -fx-background-insets: 0, 1, 2;
+  -fx-background: -fx-accent;
+  -fx-text-fill: -fx-selection-bar-text;
+}
+
+.table-view:focused .table-row-cell:filled:selected, .table-view:row-selection .table-row-cell:filled:hover:selected {
+    -fx-background: -fx-accent;
+    -fx-background-color: -fx-selection-bar;
+    -fx-text-fill: -fx-selection-bar-text;
+}
+
+/*#plyer:pressed {-fx-background-color:   yellow;}*/
+
+#plyer{
+	-fx-background-color: #ffffff;
+	  -fx-text-fill: #000000;
+}
+#plyer:hover {
+	-fx-background-color: #0A00FF;
+	-fx-text-fill: #FFFF00;
+}
+#plyer:focused {
+	-fx-background-color: #0A00FF;
+	-fx-text-fill: #ff0000;
+}
+
+#plyer .scroll-pane:selected {
+	-fx-background-color: #0A00FF;
+	-fx-text-fill: #ff0000;
+}
+
+/*.table-view:focused .table-row-cell:filled:focused:selected:hover {
+    -fx-background: -fx-accent;
+    -fx-background-color: -fx-focus-color, -fx-cell-focus-inner-border, -fx-selection-bar;
+    -fx-background-insets: 0, 1, 2;
+    -fx-text-fill: -fx-selection-bar-text;
+}
+
+.table-row-cell:selected:disabled {
+    -fx-opacity: -fx-disabled-opacity;
+}
+
+.table-view:row-selection .table-row-cell:filled:hover { 
+    -fx-background-color: -fx-table-cell-border-color, -fx-cell-hover-color;
+    -fx-background-insets: 0, 0 0 1 0;
+    -fx-text-fill: -fx-text-inner-color;
+}
+
+.table-view:row-selection .table-row-cell:filled:focused:hover { 
+    -fx-background-color: -fx-table-cell-border-color, -fx-focus-color, -fx-cell-focus-inner-border, -fx-cell-hover-color;
+    -fx-background-insets: 0, 0 0 1 0, 1 1 2 1, 2 2 3 2, 3 3 4 3;
+    -fx-text-fill: -fx-text-inner-color;
+}
+*/

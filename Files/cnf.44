@@ -1,0 +1,34 @@
+{
+  "showPromote": {
+    "active": "0",
+    "timeOut": "5"
+  },
+  "digitalFont": {
+    "active": "1"
+  },
+  "fontColor": {
+    "colorYellow": "1"
+  },
+  "lightSchema": {
+    "useLightSchema": "0"
+  },
+  "message": {
+    "line_1": "",
+    "line_2": "Tijdens het biljarten",
+    "line_3": "horloges af A.U.B.",
+    "line_4": "",
+    "line_5": ""
+  },
+  "reclame": {
+    "active": "1"
+  },
+  "partijDuur": {
+    "active": "1"
+  },
+  "retroBord": {
+    "active": "1"
+  },
+  "orderdrinks": {
+    "od-active": "0"
+  }
+}
